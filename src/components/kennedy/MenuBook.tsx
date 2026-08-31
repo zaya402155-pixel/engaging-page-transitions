@@ -147,7 +147,7 @@ export function MenuBook() {
           <div className="menu-page menu-page--cover-front">
             <span className="menu-cover__frame" aria-hidden="true" />
             <span className="menu-cover__crest menu-cover__crest--caddy">
-              <img src={caddyAvatar} alt="" aria-hidden="true" />
+              <img src={caddyAvatar} alt="" aria-hidden="true" loading="lazy" decoding="async" />
             </span>
             <span className="menu-cover__kicker">Takii · Caddy Kitchen</span>
             <span className="menu-cover__title">Kennedy</span>
@@ -245,7 +245,7 @@ export function MenuBook() {
             >
               {/* FRONT OF SHEET: displays Recipe i Photo on the RIGHT side */}
               <div className="menu-page menu-page--front">
-                <img src={facingPhotoDish.image} alt={facingPhotoDish.name} loading="lazy" />
+                <img src={facingPhotoDish.image} alt={facingPhotoDish.name} loading="lazy" decoding="async" />
                 <span className="menu-page__veil" aria-hidden="true" />
                 <span className="menu-page__gloss" aria-hidden="true" />
                 <span className="menu-page__label">

@@ -154,6 +154,8 @@ export function CursorRobot() {
             willChange: "transform",
           }}
           className="absolute left-0 top-0 rounded-full border-2 border-cream bg-cream object-cover shadow-[0_6px_16px_rgba(0,0,0,0.28)]"
+          loading="lazy"
+          decoding="async"
         />
       ))}
 
@@ -164,8 +166,7 @@ export function CursorRobot() {
         width={816}
         height={816}
         style={{ width: "68px", height: "68px", maxWidth: "none", willChange: "transform" }}
-        className="absolute left-0 top-0 drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
-      />
+        className="absolute left-0 top-0 drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]" loading="lazy" decoding="async" />
     </div>
   );
 }

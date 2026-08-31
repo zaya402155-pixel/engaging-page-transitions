@@ -206,8 +206,7 @@ function VoiceOrderButtonInner() {
             src={caddyAvatar}
             alt=""
             aria-hidden="true"
-            className="relative h-9 w-9 rounded-full border-2 border-gold/80 object-cover"
-          />
+            className="relative h-9 w-9 rounded-full border-2 border-gold/80 object-cover" loading="lazy" decoding="async" />
           <span
             className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-charcoal ${
               isConnected ? "bg-emerald-400 animate-pulse" : "bg-emerald-500"
@@ -249,8 +248,7 @@ function VoiceOrderButtonInner() {
                   <img
                     src={caddyAvatar}
                     alt="Takii, your voice guide"
-                    className="h-11 w-11 rounded-full border-2 border-gold/80 object-cover shadow"
-                  />
+                    className="h-11 w-11 rounded-full border-2 border-gold/80 object-cover shadow" loading="lazy" decoding="async" />
                   {isConnected && (
                     <motion.span
                       className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[9px] text-white font-bold ring-2 ring-charcoal"
