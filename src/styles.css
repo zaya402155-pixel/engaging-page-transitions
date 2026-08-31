@@ -2257,12 +2257,39 @@
 
 @media (max-width: 640px) {
   .menu-book.is-open {
-    --spine-shift: 70px;
+    /* Shift the open book right enough that the flipped page (which extends
+       one full page-width to the LEFT of the spine) never leaves the screen. */
+    --spine-shift: 104px;
+    --tilt-y: -2deg;
   }
   .menu-book,
   .menu-book__page {
-    width: 200px;
-    height: 290px;
+    width: 190px;
+    height: 300px;
+  }
+
+  /* Compact the recipe (back) page so the Order button always fits. */
+  .menu-page--back {
+    gap: 0.35rem;
+    padding: 0.85rem 0.9rem;
+  }
+  .menu-page__backname {
+    font-size: 1rem;
+  }
+  .menu-page__desc {
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+  .menu-page__notes {
+    gap: 0.18rem;
+    font-size: 0.62rem;
+  }
+  .menu-page__backprice {
+    font-size: 1.05rem;
+  }
+  .menu-page__order {
+    font-size: 0.58rem;
+    padding: 0.42rem 0.7rem;
   }
 }
 
