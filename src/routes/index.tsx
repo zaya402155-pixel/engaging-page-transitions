@@ -5,6 +5,8 @@ import { Menu, X, UserRound, LogIn } from "lucide-react";
 import { toast } from "sonner";
 
 import { useSession } from "@/hooks/use-session";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 
 
 import { OrderButton } from "@/components/kennedy/OrderButton";
@@ -95,13 +97,15 @@ function Index() {
     document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const isMobile = useIsMobile();
   const heroTrackRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroTrackRef,
     offset: ["start start", "end start"],
   });
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.9, 1], [1, 1, 0]);
+  const zoom = !reduce && !isMobile;
   const rise = (delay: number) => ({
     initial: reduce ? { opacity: 0 } : { opacity: 0, y: 36 },
     animate: { opacity: 1, y: 0 },
@@ -110,12 +114,13 @@ function Index() {
 
   return (
     <div className="relative overflow-hidden bg-cream">
-      {/* scroll-zoom track for the hero */}
-      <div ref={heroTrackRef} className="relative h-[200vh]">
+      {/* scroll-zoom track for the hero (desktop only — mobile keeps a single clean screen) */}
+      <div ref={heroTrackRef} className={zoom ? "relative h-[170vh]" : "relative"}>
       <motion.div
-        style={reduce ? undefined : { scale: heroScale, opacity: heroOpacity }}
-        className="sticky top-0 h-screen origin-top overflow-hidden will-change-transform"
+        style={zoom ? { scale: heroScale, opacity: heroOpacity } : undefined}
+        className={`${zoom ? "sticky top-0 h-screen" : "relative min-h-[86svh] sm:min-h-screen"} origin-top overflow-hidden will-change-transform`}
       >
+
       {/* red wave backdrop behind the hero band */}
       <div
         className="pointer-events-none absolute inset-x-0 top-[70px] h-[560px] sm:top-[100px] sm:h-[760px]"
