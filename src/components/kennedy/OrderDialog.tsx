@@ -141,7 +141,7 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
     }, 250);
   };
 
-  const submitAddress = () => {
+  const submitAddress = async () => {
     if (!form.name.trim() || !/^[0-9+\-\s]{10,}$/.test(form.phone) || !form.street.trim()) {
       toast.error("Adhoori maloomat", { description: "Naam, sahi phone number aur address zaroori hai." });
       return;

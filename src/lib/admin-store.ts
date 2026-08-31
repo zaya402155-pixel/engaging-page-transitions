@@ -933,7 +933,8 @@ export async function saveRider(input: Partial<Rider> & { name: string; phone: s
       const res = (await api.post(ADMIN.riders, payload)) as { id?: string | number };
       await syncLiveBackendData();
       endMutation(key);
-      return res.id ?? input.id ?? null;
+      const savedId = res.id ?? input.id ?? null;
+      return savedId == null ? null : String(savedId);
     } catch (err: any) {
       toast.error(err?.message || "Failed to save rider");
       endMutation(key);
