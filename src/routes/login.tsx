@@ -192,7 +192,9 @@ function LoginPage() {
         <button
           ref={volt.btnRef}
           type="submit"
-          className="auth-cta"
+          disabled={isSubmitting}
+          aria-busy={isSubmitting}
+          className={cn("auth-cta", isSubmitting && "btn-pending")}
           onMouseEnter={() => volt.hype(true)}
           onMouseLeave={() => volt.hype(false)}
           onFocus={() => volt.hype(true)}
@@ -203,8 +205,14 @@ function LoginPage() {
           }}
           onPointerUp={() => volt.setPressedMood(false)}
         >
-          <span aria-hidden>🍕</span>
-          {volt.done ? "Order up ✓" : `Enter ${ROLE_COPY[role].destination}`}
+          {isSubmitting ? <span className="btn-spinner" aria-hidden /> : <span aria-hidden>🍕</span>}
+          {isSubmitting ? (
+            <span className="btn-dots">Checking your pass</span>
+          ) : volt.done ? (
+            "Order up ✓"
+          ) : (
+            `Enter ${ROLE_COPY[role].destination}`
+          )}
         </button>
       </form>
     </VoltScene>

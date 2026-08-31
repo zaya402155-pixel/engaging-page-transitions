@@ -16,6 +16,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { CursorRobot } from "@/components/kennedy/CursorRobot";
 import { CartDock } from "@/components/kennedy/CartDock";
 import { SoundProvider } from "@/components/kennedy/SoundProvider";
+import { SiteLoader } from "@/components/kennedy/SiteLoader";
 
 
 function NotFoundComponent() {
@@ -166,6 +167,7 @@ function RootComponent() {
           <SoundProvider />
         </>
       ) : null}
+      <SiteLoader />
       <Toaster position="top-right" richColors closeButton />
     </QueryClientProvider>
   );
