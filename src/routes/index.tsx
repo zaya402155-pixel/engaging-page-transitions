@@ -15,6 +15,7 @@ import { MenuBook } from "@/components/kennedy/MenuBook";
 import { SliceGallery } from "@/components/kennedy/SliceGallery";
 import { MascotFooter } from "@/components/kennedy/MascotFooter";
 import { VoiceOrderButton } from "@/components/kennedy/VoiceOrderButton";
+import { Reveal } from "@/components/kennedy/Reveal";
 import tomato from "@/assets/tomato.png";
 import cheeseSlice from "@/assets/cheese-slice.png";
 import cheeseLogo from "@/assets/cheese-logo.png";
@@ -329,24 +330,28 @@ function Index() {
 
       {/* next section slides over the zoomed hero */}
       <div className="relative z-10 bg-cream">
-        <SliceGallery />
+        <Reveal from="up" amount={0.15}>
+          <SliceGallery />
+        </Reveal>
 
-        <div className="relative z-20 -mt-20 sm:-mt-28">
+        <Reveal from="left" className="relative z-20 -mt-20 sm:-mt-28" amount={0.3}>
           <BonusTape />
-        </div>
+        </Reveal>
 
-        <div className="relative z-10">
+        <Reveal from="right" className="relative z-10" amount={0.12}>
           <MenuShowcase />
-        </div>
+        </Reveal>
 
-        <div className="relative z-10">
+        <Reveal from="zoom" className="relative z-10" amount={0.12}>
           <MenuBook />
-        </div>
+        </Reveal>
       </div>
 
 
       {/* footer */}
-      <MascotFooter />
+      <Reveal from="up" amount={0.1}>
+        <MascotFooter />
+      </Reveal>
 
       <VoiceOrderButton />
     </div>
