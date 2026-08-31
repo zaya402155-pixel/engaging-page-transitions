@@ -118,7 +118,7 @@ function Index() {
       <div ref={heroTrackRef} className={zoom ? "relative h-[170vh]" : "relative"}>
       <motion.div
         style={zoom ? { scale: heroScale, opacity: heroOpacity } : undefined}
-        className={`${zoom ? "sticky top-0 h-screen" : "relative min-h-screen"} origin-top overflow-hidden will-change-transform`}
+        className={`${zoom ? "sticky top-0 h-screen" : "relative min-h-[86svh] sm:min-h-screen"} origin-top overflow-hidden will-change-transform`}
       >
 
       {/* red wave backdrop behind the hero band */}
