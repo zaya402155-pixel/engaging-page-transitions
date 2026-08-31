@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import pizza from "@/assets/pizza-white.png";
 import logo from "@/assets/cheese-logo.png";
 import mascot from "@/assets/mascot-kennedy.png";
+import caddyAvatar from "@/assets/caddy-avatar.jpg";
 
 const SESSION_KEY = "kmg.loader.seen.v1";
 
@@ -112,7 +113,8 @@ export function SiteLoader() {
             <div className="loader-track">
               <motion.div className="loader-fill" style={{ width: `${progress}%` }} />
               <motion.div className="loader-caddy" style={{ left: `${progress}%` }} aria-hidden>
-                🛵
+                <span className="loader-caddy-trail" />
+                <img src={caddyAvatar} alt="" className="loader-caddy-face" />
               </motion.div>
             </div>
 

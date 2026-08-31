@@ -2656,10 +2656,29 @@
 }
 .loader-caddy {
   position: absolute;
-  top: -1.5rem;
+  top: -1.55rem;
   transform: translateX(-50%);
-  font-size: 1.5rem;
+  display: grid;
+  place-items: center;
   animation: loader-bob 0.5s ease-in-out infinite;
+}
+.loader-caddy-face {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 6px 16px oklch(0 0 0 / 0.55);
+}
+.loader-caddy-trail {
+  position: absolute;
+  right: 100%;
+  width: 2.6rem;
+  height: 0.28rem;
+  margin-right: 0.2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--color-ember));
+  opacity: 0.85;
 }
 @keyframes loader-bob {
   0%, 100% { transform: translateX(-50%) translateY(0) rotate(-2deg); }
