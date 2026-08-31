@@ -110,6 +110,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
+    scripts: [
+      {
+        // Runs before first paint: hide the curtain loader instantly for
+        // sessions that already saw it (CSS: html[data-kmg-loader-seen] .opening).
+        children:
+          "try{if(sessionStorage.getItem('kmg.loader.seen.v2'))document.documentElement.setAttribute('data-kmg-loader-seen','1')}catch(e){}",
+      },
+    ],
   }),
 
   shellComponent: RootShell,
