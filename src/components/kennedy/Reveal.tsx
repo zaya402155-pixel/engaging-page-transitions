@@ -5,7 +5,7 @@
  * viewport. Respects the user's reduced-motion preference.
  */
 import { motion, type Variants } from "framer-motion";
-import type { ElementType, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
@@ -22,7 +22,6 @@ const OFFSET: Record<Direction, { x?: number; y?: number; scale?: number }> = {
 
 export function Reveal({
   children,
-  as: Tag = "div",
   from = "up",
   delay = 0,
   duration = 0.7,
@@ -30,7 +29,6 @@ export function Reveal({
   className,
 }: {
   children: ReactNode;
-  as?: ElementType;
   from?: Direction;
   delay?: number;
   duration?: number;
@@ -38,12 +36,11 @@ export function Reveal({
   className?: string;
 }) {
   const reduced = useReducedMotion();
-  const MotionTag = motion(Tag as ElementType);
 
-  if (reduced) return <Tag className={className}>{children}</Tag>;
+  if (reduced) return <div className={className}>{children}</div>;
 
   return (
-    <MotionTag
+    <motion.div
       className={className}
       initial={{ opacity: 0, x: 0, y: 0, scale: 1, ...OFFSET[from] }}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
@@ -51,7 +48,7 @@ export function Reveal({
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </MotionTag>
+    </motion.div>
   );
 }
 
