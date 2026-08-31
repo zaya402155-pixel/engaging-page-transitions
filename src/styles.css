@@ -2682,7 +2682,7 @@ html[data-kmg-loader-seen] .opening { display: none; }
   font-family: var(--font-hero, var(--font-display));
   font-size: clamp(3.4rem, 11vw, 9rem);
   font-weight: 400;
-  line-height: .78;
+  line-height: .92;
   letter-spacing: .02em;
   text-transform: uppercase;
 }
