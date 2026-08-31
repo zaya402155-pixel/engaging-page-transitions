@@ -129,6 +129,8 @@ export function PizzaMascot() {
             width={1024}
             height={682}
             className="h-20 w-28 rotate-[-78deg] opacity-0 will-change-transform sm:h-28 sm:w-40"
+            loading="lazy"
+            decoding="async"
           />
         ))}
       </div>
@@ -167,8 +169,7 @@ export function PizzaMascot() {
             width={1024}
             height={625}
             fetchPriority="high"
-            className="w-full drop-shadow-[0_18px_14px_rgba(60,20,10,0.28)] drop-shadow-[0_44px_54px_rgba(60,20,10,0.4)]"
-          />
+            className="w-full drop-shadow-[0_18px_14px_rgba(60,20,10,0.28)] drop-shadow-[0_44px_54px_rgba(60,20,10,0.4)]" decoding="async" />
 
           {/* mascot eyes + brows */}
           <PizzaEyes />
@@ -191,8 +192,7 @@ export function PizzaMascot() {
             aria-hidden="true"
             width={1024}
             height={1024}
-            className="w-full drop-shadow-[0_10px_18px_rgba(60,20,10,0.35)]"
-          />
+            className="w-full drop-shadow-[0_10px_18px_rgba(60,20,10,0.35)]" loading="lazy" decoding="async" />
         </div>
       </motion.div>
     </div>

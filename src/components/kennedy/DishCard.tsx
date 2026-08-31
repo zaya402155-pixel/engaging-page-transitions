@@ -31,8 +31,7 @@ export function DishCard({ image, alt, title, index }: Props) {
           width={800}
           height={600}
           loading="lazy"
-          className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-[1.06] sm:h-36"
-        />
+          className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-[1.06] sm:h-36" decoding="async" />
       </div>
       <p className="font-display text-sm leading-snug font-bold text-charcoal">{title}</p>
       <OrderButton size="sm" className="self-start">

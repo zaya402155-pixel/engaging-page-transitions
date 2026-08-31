@@ -43,8 +43,7 @@ export function ProfileBanner({
           alt="Charcoal grill embers"
           width={1920}
           height={560}
-          className="h-full w-full object-cover"
-        />
+          className="h-full w-full object-cover" loading="lazy" decoding="async" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-transparent" />
         <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full border border-cream/25 bg-charcoal/55 px-3 py-1.5 font-display text-[10px] font-extrabold uppercase tracking-[0.18em] text-cream backdrop-blur">
           <BadgeCheck className="h-3.5 w-3.5 text-flame" aria-hidden="true" />
@@ -63,8 +62,7 @@ export function ProfileBanner({
                 width={816}
                 height={816}
                 loading="lazy"
-                className="h-24 w-24 rounded-[1.3rem] border-2 border-flame object-cover sm:h-28 sm:w-28"
-              />
+                className="h-24 w-24 rounded-[1.3rem] border-2 border-flame object-cover sm:h-28 sm:w-28" decoding="async" />
             </span>
             {onChangeAvatar && (
               <button

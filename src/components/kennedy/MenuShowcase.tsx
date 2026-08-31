@@ -114,7 +114,7 @@ export function MenuShowcase() {
                 aria-label={`${dish.name} — full details`}
               >
                 {dish.ribbon && <GiftRibbon kind={dish.ribbon} />}
-                <img src={dish.image} alt={dish.name} loading="lazy" width={900} height={700} />
+                <img src={dish.image} alt={dish.name} loading="lazy" width={900} height={700} decoding="async" />
                 <span className="glass-card__zoom">
                   <Search className="h-4 w-4" aria-hidden="true" />
                   View details

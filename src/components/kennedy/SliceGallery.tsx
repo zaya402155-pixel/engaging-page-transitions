@@ -86,8 +86,7 @@ function TiltCard({
           src={card.src}
           alt={card.alt}
           loading="lazy"
-          className="h-full w-full object-cover"
-        />
+          className="h-full w-full object-cover" decoding="async" />
         <span className="slice-card__sheen" aria-hidden="true" />
       </div>
     </motion.div>

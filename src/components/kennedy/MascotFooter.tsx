@@ -147,8 +147,7 @@ export function MascotFooter() {
               width={1024}
               height={295}
               loading="lazy"
-              className="mx-auto h-12 w-auto"
-            />
+              className="mx-auto h-12 w-auto" decoding="async" />
             <div className="sm:text-right">
               <p className="font-display text-xs font-extrabold tracking-[0.2em] uppercase">
                 Social Me

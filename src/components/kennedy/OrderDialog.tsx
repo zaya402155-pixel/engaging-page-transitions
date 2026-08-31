@@ -217,8 +217,7 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
                   src={dish.image}
                   alt={dish.name}
                   className="h-40 w-full object-cover sm:h-52"
-                  loading="lazy"
-                />
+                  loading="lazy" decoding="async" />
                 <button
                   type="button"
                   onClick={close}

@@ -2595,8 +2595,8 @@ html[data-kmg-loader-seen] .opening { display: none; }
   overflow: hidden;
   pointer-events: none;
   background: var(--curtain-deep);
-  animation: opening-away 0.2s linear 4.8s forwards;
 }
+.opening.is-opening { animation: opening-away 0.25s linear 2.35s forwards; }
 
 .curtain {
   position: absolute;
@@ -2604,6 +2604,7 @@ html[data-kmg-loader-seen] .opening { display: none; }
   top: 0;
   bottom: 0;
   width: 50.5%;
+  will-change: transform;
   background-color: var(--curtain);
   background-image: linear-gradient(90deg, oklch(0.1 0.06 20 / .78), transparent 7%, oklch(0.72 0.15 27 / .3) 16%, oklch(0.13 0.07 20 / .76) 26%, oklch(0.66 0.16 25 / .25) 39%, oklch(0.11 0.06 20 / .78) 52%, oklch(0.68 0.16 28 / .24) 68%, oklch(0.1 0.06 20 / .8) 84%, oklch(0.7 0.16 28 / .22) 94%, oklch(0.09 0.05 20 / .85));
   box-shadow: inset 0 -6rem 7rem oklch(0.06 0.035 20 / .68), inset 0 0 3rem oklch(0.75 0.14 25 / .12);
@@ -2617,13 +2618,19 @@ html[data-kmg-loader-seen] .opening { display: none; }
 .curtain-left {
   left: 0;
   transform-origin: left center;
-  animation: curtain-left 2.8s cubic-bezier(.78,.02,.18,1) 1.75s forwards;
+  animation: curtain-breathe 6s ease-in-out infinite;
 }
 .curtain-right {
   right: 0;
   transform-origin: right center;
-  transform: scaleX(-1);
-  animation: curtain-right 2.8s cubic-bezier(.78,.02,.18,1) 1.75s forwards;
+  background-image: linear-gradient(270deg, oklch(0.1 0.06 20 / .78), transparent 7%, oklch(0.72 0.15 27 / .3) 16%, oklch(0.13 0.07 20 / .76) 26%, oklch(0.66 0.16 25 / .25) 39%, oklch(0.11 0.06 20 / .78) 52%, oklch(0.68 0.16 28 / .24) 68%, oklch(0.1 0.06 20 / .8) 84%, oklch(0.7 0.16 28 / .22) 94%, oklch(0.09 0.05 20 / .85));
+  animation: curtain-breathe-r 6s ease-in-out infinite;
+}
+.is-opening .curtain-left {
+  animation: curtain-left 2.4s cubic-bezier(.76,.01,.16,1) forwards;
+}
+.is-opening .curtain-right {
+  animation: curtain-right 2.4s cubic-bezier(.76,.01,.16,1) forwards;
 }
 
 .curtain-valance {
@@ -2637,7 +2644,9 @@ html[data-kmg-loader-seen] .opening { display: none; }
   background-color: var(--curtain);
   background-image: repeating-linear-gradient(90deg, oklch(0.12 0.07 20 / .8) 0 3%, transparent 6% 9%);
   box-shadow: 0 1.3rem 2rem oklch(0.07 0.03 20 / .62);
-  animation: valance-up 1.5s cubic-bezier(.75,.02,.25,1) 2.75s forwards;
+}
+.is-opening .curtain-valance {
+  animation: valance-up 1.5s cubic-bezier(.75,.02,.25,1) .85s forwards;
 }
 
 .opening-glow {
@@ -2651,8 +2660,9 @@ html[data-kmg-loader-seen] .opening { display: none; }
   background: var(--brass);
   box-shadow: 0 0 1.5rem .35rem var(--brass), 0 0 6rem 1.8rem oklch(0.68 0.2 42 / .55);
   opacity: 0;
-  animation: seam-light 2.2s ease 1.15s both;
+  animation: seam-idle 3.2s ease-in-out .5s infinite;
 }
+.is-opening .opening-glow { animation: seam-light 1.9s ease both; }
 
 .opening-title {
   position: absolute;
@@ -2664,14 +2674,15 @@ html[data-kmg-loader-seen] .opening { display: none; }
   justify-content: center;
   color: var(--smoke);
   text-align: center;
-  animation: title-rise 1.3s cubic-bezier(.2,.8,.2,1) .15s both, title-fade .65s ease 1.4s forwards;
+  animation: title-rise 1.4s cubic-bezier(.2,.8,.2,1) .15s both;
 }
+.is-opening .opening-title { animation: title-fade .7s cubic-bezier(.4,0,.2,1) forwards; }
 .opening-title span,
 .opening-title strong {
   font-family: var(--font-hero, var(--font-display));
   font-size: clamp(3.4rem, 11vw, 9rem);
   font-weight: 400;
-  line-height: .78;
+  line-height: .92;
   letter-spacing: .02em;
   text-transform: uppercase;
 }
@@ -2685,24 +2696,84 @@ html[data-kmg-loader-seen] .opening { display: none; }
   letter-spacing: .38em;
 }
 
+/* --- real progress meter --- */
+.opening-status {
+  position: absolute;
+  z-index: 6;
+  bottom: clamp(2.5rem, 8vh, 5rem);
+  left: 50%;
+  width: min(22rem, 72vw);
+  transform: translateX(-50%);
+  color: var(--smoke);
+  animation: status-in .9s cubic-bezier(.2,.8,.2,1) .5s both;
+  transition: opacity .45s ease, transform .45s ease;
+}
+.is-opening .opening-status {
+  opacity: 0;
+  transform: translateX(-50%) translateY(.75rem);
+}
+.opening-bar {
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: oklch(1 0 0 / .16);
+}
+.opening-bar-fill {
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brass), oklch(0.92 0.08 82));
+  box-shadow: 0 0 .9rem var(--brass);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.opening-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .85rem;
+  font-family: var(--font-sans, sans-serif);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  opacity: .78;
+}
+.opening-pct { color: var(--brass); font-variant-numeric: tabular-nums; }
+
+@keyframes status-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(1rem); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
 @keyframes title-rise {
   from { opacity: 0; transform: translateY(1.5rem); filter: blur(6px); }
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-@keyframes title-fade { to { opacity: 0; transform: translateY(-1rem); } }
+@keyframes title-fade { to { opacity: 0; transform: translateY(-1.25rem) scale(1.03); filter: blur(4px); } }
+@keyframes curtain-breathe {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(-0.35%) scaleX(1.005); }
+}
+@keyframes curtain-breathe-r {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(0.35%) scaleX(1.005); }
+}
 @keyframes curtain-left {
   45% { transform: translateX(-42%) scaleX(.72) skewY(1deg); }
   to { transform: translateX(-100%) scaleX(.08) skewY(3deg); }
 }
 @keyframes curtain-right {
-  45% { transform: translateX(42%) scaleX(-.72) skewY(-1deg); }
-  to { transform: translateX(100%) scaleX(-.08) skewY(-3deg); }
+  45% { transform: translateX(42%) scaleX(.72) skewY(-1deg); }
+  to { transform: translateX(100%) scaleX(.08) skewY(-3deg); }
 }
 @keyframes valance-up { to { transform: translateY(-110%); } }
 @keyframes opening-away { to { visibility: hidden; } }
+@keyframes seam-idle {
+  0%, 100% { opacity: .18; }
+  50% { opacity: .5; }
+}
 @keyframes seam-light {
-  0% { opacity: 0; transform: translateX(-50%) scaleY(.05); }
-  30% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+  0% { opacity: .3; transform: translateX(-50%) scaleY(.4); }
+  28% { opacity: 1; transform: translateX(-50%) scaleY(1); }
   100% { opacity: 0; width: 22vw; transform: translateX(-50%) scaleY(1); }
 }
 
@@ -2756,4 +2827,26 @@ html[data-kmg-loader-seen] .opening { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .opening { display: none; }
   .btn-spinner, .btn-dots::after { animation: none !important; }
+}
+
+/* ==========================================================================
+   CREAMY POLISH — smooth scroll + soft image fade-in
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Images fade + settle once decoded, so lazy loads never pop in harshly. */
+img[loading="lazy"]:not([style]) {
+  animation: img-in .55s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes img-in {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  img[loading="lazy"] { animation: none !important; }
 }

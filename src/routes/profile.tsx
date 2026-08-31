@@ -508,8 +508,7 @@ function ProfilePage() {
                             <img
                               src={current.dish_image}
                               alt={current.dish_name}
-                              className="h-16 w-16 rounded-xl object-cover"
-                            />
+                              className="h-16 w-16 rounded-xl object-cover" loading="lazy" decoding="async" />
                           )}
                           <div>
                             <p className="font-display text-sm font-extrabold uppercase text-charcoal">
@@ -810,8 +809,7 @@ function OrderRow({ order, expandable }: { order: DbOrder; expandable?: boolean 
           <img
             src={order.dish_image}
             alt={order.dish_name}
-            className="h-12 w-12 rounded-xl object-cover"
-          />
+            className="h-12 w-12 rounded-xl object-cover" loading="lazy" decoding="async" />
         )}
         <div className="min-w-0 flex-1">
           <p className="truncate font-display text-xs font-extrabold uppercase text-charcoal">
@@ -975,8 +973,7 @@ function SavedGrid({
               <img
                 src={d!.image}
                 alt={d!.name}
-                className="h-12 w-12 shrink-0 rounded-xl object-cover"
-              />
+                className="h-12 w-12 shrink-0 rounded-xl object-cover" loading="lazy" decoding="async" />
               <div className="min-w-0 flex-1">
                 <Link
                   to="/dish/$slug"

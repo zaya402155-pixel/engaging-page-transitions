@@ -131,8 +131,7 @@ function DishPage() {
                 alt={dish.name}
                 width={1200}
                 height={900}
-                className="h-[280px] w-full object-cover sm:h-[420px]"
-              />
+                className="h-[280px] w-full object-cover sm:h-[420px]" loading="lazy" decoding="async" />
 
               {lens.show && (
                 <span
@@ -385,8 +384,7 @@ function DishPage() {
                   src={d.image}
                   alt={d.name}
                   loading="lazy"
-                  className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                  className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105" decoding="async" />
                 <div className="p-3">
                   <p className="font-display text-sm font-extrabold text-charcoal">{d.name}</p>
                   <p className="font-body text-xs text-charcoal/60">Rs {d.price}</p>

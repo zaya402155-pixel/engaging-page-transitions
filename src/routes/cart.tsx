@@ -231,8 +231,7 @@ function CartPage() {
                     <img
                       src={i.dish.image}
                       alt={i.dish.name}
-                      className="h-16 w-16 shrink-0 rounded-xl object-cover"
-                    />
+                      className="h-16 w-16 shrink-0 rounded-xl object-cover" loading="lazy" decoding="async" />
 
                     <div className="min-w-0 flex-1">
                       <p className="font-display text-sm font-extrabold uppercase text-charcoal">
