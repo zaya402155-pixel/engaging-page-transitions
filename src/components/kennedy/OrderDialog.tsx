@@ -70,10 +70,17 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
 
   useEffect(() => {
     if (!intent) return;
-    const list = loadAddresses();
-    setAddresses(list);
-    setSelectedAddr(list[0]?.id ?? null);
-    setAdding(list.length === 0);
+    let cancelled = false;
+    void (async () => {
+      const list = await loadAddresses();
+      if (cancelled) return;
+      setAddresses(list);
+      setSelectedAddr(list[0]?.id != null ? String(list[0].id) : null);
+      setAdding(list.length === 0);
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [intent]);
 
   useEffect(() => {
@@ -140,9 +147,9 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
       return;
     }
     const addr: Address = { id: crypto.randomUUID(), ...form };
-    const all = saveAddress(addr);
+    const all = await saveAddress(addr);
     setAddresses(all);
-    setSelectedAddr(addr.id);
+    setSelectedAddr(String(addr.id));
     setAdding(false);
     toast.success("Address saved", { description: `${addr.label} · ${addr.street}` });
   };
@@ -163,7 +170,7 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
         // Save to the account so it shows up in Profile → order tracking.
         try {
           const id = await createOrder({
-            userId: getLocalUser().id,
+            userId: getLocalUser()?.id ?? "",
             orderCode: o.id,
             dishName: dish.name,
             dishImage: dish.image,
@@ -350,7 +357,7 @@ export function OrderDialog({ intent, onClose }: { intent: OrderIntent; onClose:
                         key={a.id}
                         type="button"
                         onClick={() => {
-                          setSelectedAddr(a.id);
+                          setSelectedAddr(String(a.id));
                           setAdding(false);
                         }}
                         className={`flex w-full gap-3 rounded-2xl border-2 p-3 text-left transition-colors ${

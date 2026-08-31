@@ -930,7 +930,7 @@ export async function saveRider(input: Partial<Rider> & { name: string; phone: s
       if (input.id) {
         payload.id = input.id;
       }
-      const res = await api.post(ADMIN.riders, payload);
+      const res = (await api.post(ADMIN.riders, payload)) as { id?: string | number };
       await syncLiveBackendData();
       endMutation(key);
       return res.id ?? input.id ?? null;

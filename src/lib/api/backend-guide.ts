@@ -23,7 +23,7 @@ export function logBackendGuide() {
   console.table([
     { screen: "login / signup", stub: "src/lib/auth.ts", endpoint: `${AUTH.login} · ${AUTH.register} · ${AUTH.me}` },
     { screen: "profile", stub: "src/lib/account.ts → fetchProfile/saveProfile", endpoint: PROFILE.detail },
-    { screen: "orders + tracking", stub: "src/lib/account.ts → fetchOrders/createOrder", endpoint: `${ORDERS.list} · ${ORDERS.tracking("{code}")}` },
+    { screen: "orders + tracking", stub: "src/lib/account.ts → fetchOrders/createOrder", endpoint: `${ORDERS.list} · ${ORDERS.detail("{code}")}` },
     { screen: "menu / menu book", stub: "src/lib/menu.ts → DISHES", endpoint: MENU.dishes },
     { screen: "owner console", stub: "src/lib/admin-store.ts", endpoint: `${ADMIN.orders} · ${ADMIN.stats}` },
     { screen: "rider console", stub: "src/lib/admin-store.ts + rider-location.ts", endpoint: `${RIDER.jobs} · ${RIDER.location}` },

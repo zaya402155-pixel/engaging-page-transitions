@@ -114,7 +114,7 @@ export async function signIn(usernameOrEmail: string, pass: string, role?: Accou
   tokens.set(res.access, res.refresh);
 
   const u = res.user;
-  const rawRole = (u?.role || (u?.is_superuser ? "admin" : role) || "customer") as AccountRole;
+  const rawRole = (u?.role || ((u as { is_superuser?: boolean } | undefined)?.is_superuser ? "admin" : role) || "customer") as AccountRole;
   const account: AuthAccount = {
     id: u?.id ? String(u.id) : `user-${Date.now()}`,
     name: u?.full_name || u?.username || usernameOrEmail.split("@")[0] || "User",

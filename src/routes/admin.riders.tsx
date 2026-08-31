@@ -191,7 +191,7 @@ function Riders() {
         <StatCard
           label="Pending Approvals"
           value={totalPending}
-          tone={totalPending > 0 ? "good" : "neutral"}
+          tone={totalPending > 0 ? "good" : "plain"}
           hint="Tier 1 & Tier 2 queue"
           icon={<Star className="h-4 w-4" />}
         />

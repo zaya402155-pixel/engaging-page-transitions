@@ -78,7 +78,8 @@ function VoiceOrderButtonInner() {
         }
       }
     },
-    onError: (err) => {
+    onError: (rawErr: unknown) => {
+      const err = rawErr as unknown;
       setIsStarting(false);
       const msg = typeof err === "string" ? err : err instanceof Error ? err.message : "Voice connection error.";
       setError(msg);
