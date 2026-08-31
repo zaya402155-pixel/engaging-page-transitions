@@ -60,8 +60,11 @@ function LoginPage() {
     }
 
     setIsSubmitting(true);
+    // Keep the pending animation on screen long enough to read, even when the
+    // API answers instantly.
+    const minPending = new Promise((r) => setTimeout(r, 650));
     try {
-      const account = await signIn(email, pass, role);
+      const [account] = await Promise.all([signIn(email, pass, role), minPending]);
       const target = ROLE_HOME[account.role] || ROLE_HOME[role] || "/profile";
       volt.celebrate("Oven's hot. Welcome back to Kennedy Moon Grill!");
       toast.success(`Welcome back, ${account.name}`);
@@ -74,7 +77,6 @@ function LoginPage() {
         volt.complain(msg);
       }
       toast.error(msg);
-    } finally {
       setIsSubmitting(false);
     }
 

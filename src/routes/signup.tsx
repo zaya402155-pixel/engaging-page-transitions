@@ -57,8 +57,10 @@ function SignupPage() {
     if (!form.password) return volt.complain("A password would help. Even a small one.");
 
     setIsSubmitting(true);
+    // Keep the pending animation on screen long enough to read.
+    const minPending = new Promise((r) => setTimeout(r, 650));
     try {
-      const account = await signUp({ ...form, role });
+      const [account] = await Promise.all([signUp({ ...form, role }), minPending]);
 
       if (account.status === "pending_approval" || role === "rider" || role === "staff") {
         volt.celebrate(`Application sent, ${account.name.split(" ")[0]}! Team is reviewing.`);
@@ -66,6 +68,7 @@ function SignupPage() {
           description: "Aapki application admin approval ke liye submit ho chuki hai.",
         });
         setPendingApproval({ name: account.name, role });
+        setIsSubmitting(false);
         return;
       }
 
@@ -79,7 +82,6 @@ function SignupPage() {
       const msg = err instanceof ApiError ? err.message : (err as Error)?.message || "Sign up failed";
       volt.complain(msg);
       toast.error(msg);
-    } finally {
       setIsSubmitting(false);
     }
   }
