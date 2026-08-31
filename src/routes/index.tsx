@@ -5,6 +5,8 @@ import { Menu, X, UserRound, LogIn } from "lucide-react";
 import { toast } from "sonner";
 
 import { useSession } from "@/hooks/use-session";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 
 
 import { OrderButton } from "@/components/kennedy/OrderButton";
