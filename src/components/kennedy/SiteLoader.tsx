@@ -1,23 +1,28 @@
 /**
  * SITE LOADER — premium theatre-curtain opening.
  *
- * Shown once per browser session. Two velvet curtains part from a glowing
- * brass seam while the wordmark rises, then the whole stage lifts away to
- * reveal the site. Fully CSS-timed so it cannot hang on slow devices.
+ * Rendered on the very first paint (SSR included) so the curtains are up
+ * before the site shows. An inline head script in __root sets
+ * `data-kmg-loader-seen` on <html> for returning sessions, and CSS hides
+ * the loader instantly in that case — no flash either way. Once per
+ * session, the curtains part from a glowing brass seam while the wordmark
+ * rises, then the stage lifts away. Fully CSS-timed so it cannot hang.
  */
 import { useEffect, useState } from "react";
 
-const SESSION_KEY = "kmg.loader.seen.v2";
+export const LOADER_SESSION_KEY = "kmg.loader.seen.v2";
 const DURATION_MS = 5200;
 
 export function SiteLoader() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(SESSION_KEY)) return;
-    sessionStorage.setItem(SESSION_KEY, "1");
-    setVisible(true);
+    if (sessionStorage.getItem(LOADER_SESSION_KEY)) {
+      setVisible(false);
+      return;
+    }
+    sessionStorage.setItem(LOADER_SESSION_KEY, "1");
     document.body.style.overflow = "hidden";
     const t = window.setTimeout(() => {
       setVisible(false);

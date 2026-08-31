@@ -2586,6 +2586,8 @@
   --smoke: var(--color-cream, oklch(0.91 0.015 74));
 }
 
+html[data-kmg-loader-seen] .opening { display: none; }
+
 .opening {
   position: fixed;
   z-index: 200;
